@@ -164,9 +164,9 @@ With Poppler's `pdftoppm` on `PATH`, run:
 
 ```sh
 mkdir -p work/final_render/pro work/final_render/home work/final_render/mac
-pdftoppm -png -r 144 outputs/Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf work/final_render/pro/page
-pdftoppm -png -r 144 outputs/Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf work/final_render/home/page
-pdftoppm -png -r 144 outputs/macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.1.pdf work/final_render/mac/page
+pdftoppm -png -r 144 outputs/Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.2.pdf work/final_render/pro/page
+pdftoppm -png -r 144 outputs/Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.2.pdf work/final_render/home/page
+pdftoppm -png -r 144 outputs/macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.2.pdf work/final_render/mac/page
 python tools/make_contact_sheets.py
 ```
 

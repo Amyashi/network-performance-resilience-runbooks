@@ -16,9 +16,9 @@ OUTPUTS = ROOT / "outputs"
 REPOSITORY = "Amyashi/network-performance-resilience-runbooks"
 
 PDF_SPECS = {
-    "Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf": 32,
-    "Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf": 32,
-    "macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.1.pdf": 26,
+    "Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.2.pdf": 32,
+    "Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.2.pdf": 32,
+    "macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.2.pdf": 26,
 }
 
 ACCESSIBLE_SPECS = {
@@ -233,6 +233,145 @@ def check_accessible_guides(errors: list[str]) -> None:
             errors.append(f"{relative}: incomplete ending")
 
 
+def normalize_package_name(name: str) -> str:
+    return re.sub(r"[-_.]+", "-", name).lower()
+
+
+def parse_direct_requirements(errors: list[str]) -> dict[str, tuple[str, str]] | None:
+    path = ROOT / "requirements.txt"
+    found: dict[str, tuple[str, str]] = {}
+    valid = True
+    for line_number, raw_line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        match = re.fullmatch(
+            r"([A-Za-z0-9_.-]+)==([A-Za-z0-9_.+-]+)",
+            line,
+        )
+        if not match:
+            errors.append(
+                f"requirements.txt:{line_number}: dependency is not directly pinned: "
+                f"{line!r}"
+            )
+            valid = False
+            continue
+        display_name, version = match.groups()
+        normalized = normalize_package_name(display_name)
+        if normalized in found:
+            errors.append(
+                f"requirements.txt:{line_number}: duplicate dependency "
+                f"{display_name!r}"
+            )
+            valid = False
+            continue
+        found[normalized] = (display_name, version)
+    if not found:
+        errors.append("requirements.txt: no direct dependencies found")
+        valid = False
+    return found if valid else None
+
+
+def check_dependency_notice_versions(errors: list[str]) -> None:
+    requirements = parse_direct_requirements(errors)
+    if requirements is None:
+        return
+
+    path = ROOT / "THIRD_PARTY_NOTICES.md"
+    lines = path.read_text(encoding="utf-8").splitlines()
+    header = "| Component | Version | Purpose | License |"
+    try:
+        header_index = lines.index(header)
+    except ValueError:
+        errors.append("THIRD_PARTY_NOTICES.md: direct-dependency table is missing")
+        return
+
+    if header_index + 1 >= len(lines):
+        errors.append("THIRD_PARTY_NOTICES.md: direct-dependency table is incomplete")
+        return
+    separator_cells = [
+        cell.strip()
+        for cell in lines[header_index + 1].strip().split("|")[1:-1]
+    ]
+    if (
+        len(separator_cells) != 4
+        or not all(re.fullmatch(r":?-{3,}:?", cell) for cell in separator_cells)
+    ):
+        errors.append("THIRD_PARTY_NOTICES.md: malformed dependency-table separator")
+        return
+
+    notices: dict[str, tuple[str, str, str]] = {}
+    row_index = header_index + 2
+    while row_index < len(lines) and lines[row_index].strip():
+        line_number = row_index + 1
+        cells = [
+            cell.strip()
+            for cell in lines[row_index].strip().split("|")[1:-1]
+        ]
+        if len(cells) != 4 or not all(cells):
+            errors.append(
+                f"THIRD_PARTY_NOTICES.md:{line_number}: malformed dependency row"
+            )
+            row_index += 1
+            continue
+        component, visible_version, _purpose, _license = cells
+        link_match = re.fullmatch(
+            r"\[([A-Za-z0-9_.-]+)\]"
+            r"\(https://pypi\.org/project/([A-Za-z0-9_.-]+)/([^/()]+)/\)",
+            component,
+        )
+        if not link_match:
+            errors.append(
+                f"THIRD_PARTY_NOTICES.md:{line_number}: component must be a "
+                "version-specific PyPI link"
+            )
+            row_index += 1
+            continue
+        label, project_slug, url_version = link_match.groups()
+        normalized = normalize_package_name(project_slug)
+        if normalize_package_name(label) != normalized:
+            errors.append(
+                f"THIRD_PARTY_NOTICES.md:{line_number}: link label {label!r} "
+                f"does not match PyPI project {project_slug!r}"
+            )
+        if normalized in notices:
+            errors.append(
+                f"THIRD_PARTY_NOTICES.md:{line_number}: duplicate dependency "
+                f"{project_slug!r}"
+            )
+            row_index += 1
+            continue
+        notices[normalized] = (project_slug, visible_version, url_version)
+        row_index += 1
+
+    missing = sorted(set(requirements) - set(notices))
+    unexpected = sorted(set(notices) - set(requirements))
+    if missing:
+        errors.append(
+            "THIRD_PARTY_NOTICES.md: missing direct dependencies: "
+            + ", ".join(missing)
+        )
+    if unexpected:
+        errors.append(
+            "THIRD_PARTY_NOTICES.md: unexpected direct dependencies: "
+            + ", ".join(unexpected)
+        )
+
+    for normalized in sorted(set(requirements) & set(notices)):
+        requirement_name, pinned_version = requirements[normalized]
+        _notice_name, visible_version, url_version = notices[normalized]
+        if visible_version != pinned_version:
+            errors.append(
+                f"{requirement_name}: notice version {visible_version} "
+                f"!= pinned {pinned_version}"
+            )
+        if url_version != pinned_version:
+            errors.append(
+                f"{requirement_name}: notice URL version {url_version} "
+                f"!= pinned {pinned_version}"
+            )
+
+
 def check_relative_links(errors: list[str]) -> None:
     for relative in ("README.md", "ACCESSIBILITY.md", "CONTRIBUTING.md", "LICENSE.md"):
         text = (ROOT / relative).read_text(encoding="utf-8")
@@ -305,11 +444,7 @@ def main() -> int:
         if alias not in source_text:
             errors.append(f"builders do not declare Base 14 {alias}")
 
-    requirements = (ROOT / "requirements.txt").read_text(encoding="utf-8")
-    for line in requirements.splitlines():
-        line = line.strip()
-        if line and not line.startswith("#") and not re.fullmatch(r"[A-Za-z0-9_.-]+==[A-Za-z0-9_.+-]+", line):
-            errors.append(f"requirements.txt: dependency is not directly pinned: {line!r}")
+    check_dependency_notice_versions(errors)
 
     for name, pages in PDF_SPECS.items():
         path = OUTPUTS / name

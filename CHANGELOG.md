@@ -1,5 +1,20 @@
 # Changelog
 
+## 1.0.2 - 2026-07-30
+
+- Updated ReportLab from 4.4.9 to 5.0.0 and pdfplumber from 0.11.9 to
+  0.11.10 after independent deterministic-build and parser-geometry
+  compatibility checks.
+- Corrected all direct build/QA dependency versions and links in the
+  third-party notices.
+- Added release validation that requires exact version parity between
+  `requirements.txt` and the direct-dependency notice table.
+- Strengthened PDF QA to require matching parser page counts and nonempty
+  pdfplumber character extraction on every page.
+- Rebuilt and validated all three editions without changing implementation
+  guidance, field evidence, settings, procedures, pass/fail criteria, or
+  recommendations.
+
 ## 1.0.1 - 2026-07-30
 
 - Updated the build and PDF-QA dependency baselines from `pypdf` 6.10.0 to

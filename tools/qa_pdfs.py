@@ -13,7 +13,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUTS = ROOT / "outputs"
 SPECS = {
-    "Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf": {
+    "Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.2.pdf": {
         "pages": 32,
         "required": [
             "Windows 11 Pro Wired Network Performance & Resilience Runbook",
@@ -30,7 +30,7 @@ SPECS = {
         ],
         "forbidden": ["Home in S mode", "fake gpedit packages"],
     },
-    "Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf": {
+    "Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.2.pdf": {
         "pages": 32,
         "required": [
             "Windows 11 Home Wired Network Performance & Resilience Runbook",
@@ -52,7 +52,7 @@ SPECS = {
             "Do not include drivers with Windows Updates",
         ],
     },
-    "macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.1.pdf": {
+    "macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.2.pdf": {
         "pages": 26,
         "required": [
             "macOS Network Performance & Resilience Runbook",
@@ -164,8 +164,22 @@ def check_one(path: Path, spec: dict) -> dict:
         warnings.append(f"{duplicate_count} duplicate link annotations")
 
     with pdfplumber.open(path) as document:
+        if len(document.pages) != len(reader.pages):
+            errors.append(
+                "pdfplumber page count "
+                f"{len(document.pages)} does not match pypdf page count "
+                f"{len(reader.pages)}"
+            )
         for index, page in enumerate(document.pages, 1):
-            for char in page.chars:
+            try:
+                chars = page.chars
+            except Exception as exc:  # pragma: no cover - defensive parsing guard
+                errors.append(f"page {index}: pdfplumber character extraction failed: {exc}")
+                continue
+            if not chars:
+                errors.append(f"page {index}: pdfplumber found no extractable characters")
+                continue
+            for char in chars:
                 if char["x0"] < -0.5 or char["x1"] > page.width + 0.5:
                     errors.append(f"page {index}: horizontal glyph out of bounds")
                     break
