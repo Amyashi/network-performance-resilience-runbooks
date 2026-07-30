@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.1 - 2026-07-30
+
+- Updated the build and PDF-QA dependency baselines from `pypdf` 6.10.0 to
+  6.14.2 and Pillow 12.2.0 to 12.3.0, addressing all 30 Dependabot alerts.
+- Rebuilt and validated the Windows 11 Pro, Windows 11 Home, and macOS editions,
+  regenerated accessible companions and checksums, and completed full rendered
+  visual review.
+- Made no changes to implementation guidance, field evidence, settings,
+  procedures, pass/fail criteria, or recommendations.
+
 ## 1.0.0 - 2026-07-30
 
 - Published separate Windows 11 Pro, Windows 11 Home, and macOS Apple-silicon

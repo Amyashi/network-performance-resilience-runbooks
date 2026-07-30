@@ -16,9 +16,9 @@ defects.
 - The
   [macOS Apple Silicon Markdown companion](docs/MACOS_APPLE_SILICON_ACCESSIBLE_GUIDE.md)
   follows the macOS PDF's direct-host, eero-wide, Wi-Fi, and throughput paths.
-- The [Windows 11 Pro PDF](outputs/Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.0.pdf),
-  [Windows 11 Home PDF](outputs/Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.0.pdf),
-  and [macOS PDF](outputs/macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.0.pdf)
+- The [Windows 11 Pro PDF](outputs/Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf),
+  [Windows 11 Home PDF](outputs/Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf),
+  and [macOS PDF](outputs/macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.1.pdf)
   are the designed visual editions.
 
 Each Markdown companion contains the essential safety warnings, prerequisites,

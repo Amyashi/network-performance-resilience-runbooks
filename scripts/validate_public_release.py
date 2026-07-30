@@ -16,9 +16,9 @@ OUTPUTS = ROOT / "outputs"
 REPOSITORY = "Amyashi/network-performance-resilience-runbooks"
 
 PDF_SPECS = {
-    "Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.0.pdf": 32,
-    "Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.0.pdf": 32,
-    "macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.0.pdf": 26,
+    "Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf": 32,
+    "Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf": 32,
+    "macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.1.pdf": 26,
 }
 
 ACCESSIBLE_SPECS = {

@@ -4,7 +4,7 @@ title: "Network Performance & Resilience Runbooks"
 type: software
 authors:
   - name: "Amyashi"
-version: "1.0.0"
+version: "1.0.1"
 date-released: 2026-07-30
 repository-code: "https://github.com/Amyashi/network-performance-resilience-runbooks"
 url: "https://github.com/Amyashi/network-performance-resilience-runbooks"
@@ -30,5 +30,5 @@ preferred-citation:
   authors:
     - family-names: "Amyashi"
   year: 2026
-  version: "1.0.0"
+  version: "1.0.1"
   url: "https://github.com/Amyashi/network-performance-resilience-runbooks"
