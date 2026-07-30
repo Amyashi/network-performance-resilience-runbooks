@@ -1,5 +1,16 @@
 # Changelog
 
+## Unreleased
+
+- Replaced direct-only Python pins with complete version- and hash-locked build
+  and validation dependency graphs.
+- Added an isolated, hash-locked `pip-audit` toolchain and read-only dependency
+  review/vulnerability-audit workflow.
+- Enforced wheel-only, hash-verified dependency installation in continuous
+  integration and documented the controlled lock-regeneration process.
+- Made no changes to reader-facing guidance, evidence, settings, procedures,
+  pass/fail criteria, recommendations, or published release artifacts.
+
 ## 1.0.2 - 2026-07-30
 
 - Updated ReportLab from 4.4.9 to 5.0.0 and pdfplumber from 0.11.9 to

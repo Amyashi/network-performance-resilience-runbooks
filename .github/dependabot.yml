@@ -12,12 +12,24 @@ updates:
     commit-message:
       prefix: "deps(pip)"
 
+  - package-ecosystem: pip
+    directory: /.github/audit
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:15"
+      timezone: America/New_York
+    target-branch: main
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: "deps(audit)"
+
   - package-ecosystem: github-actions
     directory: /
     schedule:
       interval: weekly
       day: monday
-      time: "09:15"
+      time: "09:30"
       timezone: America/New_York
     target-branch: main
     open-pull-requests-limit: 5

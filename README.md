@@ -111,7 +111,11 @@ support before relying on a dated instruction.
 | `scripts/validate_public_release.py` | Repository-wide public-release validation |
 | `scripts/update_checksums.py` | Deterministic release checksum generation |
 | `tools/make_contact_sheets.py` | Local visual-review contact sheets |
-| `requirements.txt` | Direct, version-pinned build and validation dependencies |
+| `requirements.in` | Direct, intentionally selected build and validation dependencies |
+| `requirements.txt` | Fully resolved, version- and hash-locked dependency graph |
+| `.github/audit/requirements.in` | Direct dependency for the isolated vulnerability scanner |
+| `.github/audit/requirements.txt` | Fully resolved, version- and hash-locked scanner toolchain |
+| `.github/workflows/dependency-audit.yml` | Read-only dependency review and vulnerability-audit automation |
 
 Raw chats, private screenshots, source-reconciliation notes, packet captures,
 diagnostics, full-size page renders, and contact sheets are deliberately
@@ -119,11 +123,17 @@ excluded.
 
 ## Rebuild and validate
 
-Use Python 3.12.13. Direct dependencies are version-pinned in
-`requirements.txt`, but the installer, platform, and transitive dependency
-graph are not fully locked. Treat a rebuild as release validation in the
-documented environment, not as a promise of bit-for-bit reproduction across
-arbitrary environments.
+Use Python 3.12.13. `requirements.in` records the direct project dependencies,
+and `requirements.txt` locks the complete transitive graph with approved
+distribution hashes. The supported install path accepts wheels only and fails
+if a downloaded artifact does not match the lock. The operating system,
+interpreter build, and native libraries still remain part of the release
+environment, so a successful clean rebuild and artifact comparison remain
+required.
+
+The current locked `pypdfium2` wheel requires macOS 13 or later on Apple
+silicon. This is a build-host requirement only; it does not change the macOS
+versions discussed in the reader-facing runbook.
 
 The PDF builder uses the standard PDF Base 14 Helvetica and Courier families.
 No proprietary operating-system font file is copied, embedded, or required.
@@ -145,7 +155,8 @@ python3 -m venv .venv
 Run the same build and validation commands on every platform:
 
 ```sh
-python -m pip install --disable-pip-version-check -r requirements.txt
+python -m pip install --disable-pip-version-check --only-binary=:all: --require-hashes -r requirements.txt
+python -m pip check
 python src/build_guide.py
 python src/build_macos_guide.py
 python src/build_accessible_guides.py
