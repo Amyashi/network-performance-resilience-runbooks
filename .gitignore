@@ -1,0 +1,69 @@
+# Private source capture, drafts, and generated visual-QA material
+work/
+evidence/
+private/
+logs/
+dumps/
+screenshots/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+
+# Test and tool caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Evidence, diagnostics, captures, and archives
+*.log
+*.etl
+*.evtx
+*.dmp
+*.dump
+*.mdmp
+*.core
+*.reg
+*.pcap
+*.pcapng
+*.cab
+*.zip
+*.7z
+*.tar
+*.gz
+*.png
+*.jpg
+*.jpeg
+*.webp
+*recovery*key*
+*bitlocker*key*
+
+# Temporary and backup files
+*.tmp
+*.bak
+*.swp
+*~
+~$*

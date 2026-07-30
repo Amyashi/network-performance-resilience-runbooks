@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+message: "If you reference these runbooks, please credit the author and identify the version and edition used."
+title: "Network Performance & Resilience Runbooks"
+type: software
+authors:
+  - name: "Amyashi"
+version: "1.0.0"
+date-released: 2026-07-30
+repository-code: "https://github.com/Amyashi/network-performance-resilience-runbooks"
+url: "https://github.com/Amyashi/network-performance-resilience-runbooks"
+abstract: >-
+  Implementation-first Windows 11 Home, Windows 11 Pro, and macOS Apple
+  Silicon runbooks for network baselines, 2/2 Gbps validation, bounded
+  simultaneous aggregate evidence, latency and Wi-Fi analysis, direct-host
+  and eero-wide failover, and documentation-backed 5/5 and 10/10 Gbps methods.
+keywords:
+  - "network performance"
+  - "network resilience"
+  - "Windows 11"
+  - "macOS"
+  - "iPerf3"
+  - "PsPing"
+  - "multi-gigabit Ethernet"
+  - "failover"
+  - "eero"
+  - "T-Mobile Home Backup Internet"
+preferred-citation:
+  type: report
+  title: "Network Performance & Resilience Runbooks"
+  authors:
+    - family-names: "Amyashi"
+  year: 2026
+  version: "1.0.0"
+  url: "https://github.com/Amyashi/network-performance-resilience-runbooks"

@@ -1,0 +1,53 @@
+name: Improvement proposal
+description: Propose a non-sensitive, evidence-based improvement before preparing implementation work.
+title: "[Proposal]: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is a controlled-author publication. Read CONTRIBUTING.md and the contribution-only permission in LICENSE.md before preparing implementation work. Never include sensitive evidence in this form.
+  - type: checkboxes
+    id: preflight
+    attributes:
+      label: Preflight
+      options:
+        - label: I searched existing issues and read CONTRIBUTING.md.
+          required: true
+        - label: This proposal contains no personal, system-identifying, confidential, or security-sensitive information.
+          required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: Reader need or risk
+      description: What reader problem, safety issue, or maintainability concern would this address?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      description: Describe the smallest coherent change and its affected editions, files, or sections.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence state
+      description: Distinguish documented behavior, Amy's field record, your observation, inference, and an untested method.
+    validations:
+      required: true
+  - type: textarea
+    id: sources
+    attributes:
+      label: Supporting sources
+      description: Include current primary-source links, dates checked, and the precise claim each source supports.
+    validations:
+      required: false
+  - type: textarea
+    id: validation
+    attributes:
+      label: Validation approach
+      description: Explain prerequisites, test method, pass/fail rule, rollback, and how evidence will remain sanitized.
+    validations:
+      required: false
