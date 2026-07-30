@@ -62,8 +62,11 @@ REQUIRED_FILES = {
     ".github/ISSUE_TEMPLATE/config.yml",
     ".github/ISSUE_TEMPLATE/guide_problem.yml",
     ".github/ISSUE_TEMPLATE/improvement.yml",
+    ".github/audit/requirements.in",
+    ".github/audit/requirements.txt",
     ".github/dependabot.yml",
     ".github/pull_request_template.md",
+    ".github/workflows/dependency-audit.yml",
     ".github/workflows/validate.yml",
     "ACCESSIBILITY.md",
     "CHANGELOG.md",
@@ -75,6 +78,7 @@ REQUIRED_FILES = {
     "THIRD_PARTY_NOTICES.md",
     "docs/EVIDENCE_AND_SOURCES.md",
     "licenses/REPORTLAB.txt",
+    "requirements.in",
     "requirements.txt",
     "scripts/update_checksums.py",
     "scripts/validate_public_release.py",
@@ -238,7 +242,8 @@ def normalize_package_name(name: str) -> str:
 
 
 def parse_direct_requirements(errors: list[str]) -> dict[str, tuple[str, str]] | None:
-    path = ROOT / "requirements.txt"
+    relative = "requirements.in"
+    path = ROOT / relative
     found: dict[str, tuple[str, str]] = {}
     valid = True
     for line_number, raw_line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
@@ -251,7 +256,7 @@ def parse_direct_requirements(errors: list[str]) -> dict[str, tuple[str, str]] |
         )
         if not match:
             errors.append(
-                f"requirements.txt:{line_number}: dependency is not directly pinned: "
+                f"{relative}:{line_number}: dependency is not directly pinned: "
                 f"{line!r}"
             )
             valid = False
@@ -260,14 +265,14 @@ def parse_direct_requirements(errors: list[str]) -> dict[str, tuple[str, str]] |
         normalized = normalize_package_name(display_name)
         if normalized in found:
             errors.append(
-                f"requirements.txt:{line_number}: duplicate dependency "
+                f"{relative}:{line_number}: duplicate dependency "
                 f"{display_name!r}"
             )
             valid = False
             continue
         found[normalized] = (display_name, version)
     if not found:
-        errors.append("requirements.txt: no direct dependencies found")
+        errors.append(f"{relative}: no direct dependencies found")
         valid = False
     return found if valid else None
 

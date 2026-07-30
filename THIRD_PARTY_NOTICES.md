@@ -41,7 +41,10 @@ with, sponsored by, or endorsed by any cited organization.
 
 ## Version-specific review
 
-Dependency versions are recorded in `requirements.txt`. Before distributing a
-rebuilt artifact or dependency bundle, inspect the license metadata and files
-shipped with the exact versions used. This notice is an attribution aid, not a
-substitute for those controlling terms.
+Direct dependency choices are recorded in `requirements.in`; the complete
+version- and hash-locked graph is recorded in `requirements.txt`. Before
+distributing a rebuilt artifact or dependency bundle, inspect the license
+metadata and files shipped with every exact resolved version. The isolated
+scanner toolchain under `.github/audit/` is build infrastructure, not a
+reader-facing dependency. This notice is an attribution aid, not a substitute
+for controlling license terms.

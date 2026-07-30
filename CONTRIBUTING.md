@@ -129,7 +129,9 @@ otherwise change the terms in [LICENSE.md](LICENSE.md).
 
 ## Local validation
 
-Use Python 3.12.13 and the documented dependency versions:
+Use Python 3.12.13 and the hash-locked dependency graph. Apple-silicon build
+hosts must run macOS 13 or later because that is the minimum supported by the
+current locked `pypdfium2` wheel.
 
 Create and activate a virtual environment on Windows:
 
@@ -148,7 +150,8 @@ python3 -m venv .venv
 Run the common validation sequence:
 
 ```sh
-python -m pip install --disable-pip-version-check -r requirements.txt
+python -m pip install --disable-pip-version-check --only-binary=:all: --require-hashes -r requirements.txt
+python -m pip check
 python src/build_guide.py
 python src/build_macos_guide.py
 python src/build_accessible_guides.py
@@ -156,6 +159,18 @@ python scripts/update_checksums.py
 python tools/qa_pdfs.py
 python scripts/validate_public_release.py
 ```
+
+For an intentional dependency update, edit `requirements.in`, then regenerate
+the lock with pip-tools 7.6.0 under Python 3.12.13:
+
+```powershell
+python -m pip install pip-tools==7.6.0
+python -m piptools compile --generate-hashes --resolver=backtracking --strip-extras requirements.in
+```
+
+Review every resolved-version and hash change before committing it. The
+isolated audit-tool lock under `.github/audit/` follows the regeneration
+command documented in `.github/audit/requirements.in`.
 
 Automated validation is necessary but not sufficient. Render and inspect every
 page of every changed PDF before marking a change ready for release.
