@@ -4,12 +4,14 @@ Implementation-first Windows 11 Home, Windows 11 Pro, and macOS Apple Silicon
 guides for validating and troubleshooting multi-gigabit networks without
 cargo-cult tuning.
 
-Version 1.0.0 is the initial public release. The runbooks separate
-authoritative defaults, Amy's bounded field observations, conditional changes,
-controlled experiments, and explicitly Amy-untested scaling methods. Every
-implementation path emphasizes prerequisites, exact steps, when a restart is
-actually required, validation, pass/fail criteria, rollback, and failure
-handling.
+Version 1.0.1 is a build-chain security maintenance release. It updates the
+repository's pinned `pypdf` and Pillow build/QA dependencies and does not
+change the reader-facing implementation guidance from v1.0.0. The runbooks
+separate authoritative defaults, Amy's bounded field observations, conditional
+changes, controlled experiments, and explicitly Amy-untested scaling methods.
+Every implementation path emphasizes prerequisites, exact steps, when a
+restart is actually required, validation, pass/fail criteria, rollback, and
+failure handling.
 
 These materials are general educational information. They do not certify a
 network, guarantee throughput or availability, replace current vendor
@@ -19,7 +21,7 @@ documentation, or substitute for qualified professional advice.
 
 ### Windows 11 Pro
 
-- [Designed PDF guide](outputs/Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.0.pdf)
+- [Designed PDF guide](outputs/Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf)
 - [Accessible Markdown companion](docs/WINDOWS_11_PRO_ACCESSIBLE_GUIDE.md)
 
 This edition includes the supported Windows Connection Manager Local Group
@@ -28,7 +30,7 @@ where the documented prerequisites are met.
 
 ### Windows 11 Home
 
-- [Designed PDF guide](outputs/Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.0.pdf)
+- [Designed PDF guide](outputs/Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf)
 - [Accessible Markdown companion](docs/WINDOWS_11_HOME_ACCESSIBLE_GUIDE.md)
 
 This edition preserves automatic fallback without pretending that unsupported
@@ -36,7 +38,7 @@ Group Policy workarounds reproduce Windows 11 Pro behavior.
 
 ### macOS on Apple silicon
 
-- [Designed PDF guide](outputs/macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.0.pdf)
+- [Designed PDF guide](outputs/macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.1.pdf)
 - [Accessible Markdown companion](docs/MACOS_APPLE_SILICON_ACCESSIBLE_GUIDE.md)
 
 This edition covers service order, direct M1 Pro host failover, eero-wide
@@ -167,9 +169,9 @@ renders:
 
 ```sh
 mkdir -p work/final_render/pro work/final_render/home work/final_render/mac
-pdftoppm -png -r 144 outputs/Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.0.pdf work/final_render/pro/page
-pdftoppm -png -r 144 outputs/Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.0.pdf work/final_render/home/page
-pdftoppm -png -r 144 outputs/macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.0.pdf work/final_render/mac/page
+pdftoppm -png -r 144 outputs/Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf work/final_render/pro/page
+pdftoppm -png -r 144 outputs/Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf work/final_render/home/page
+pdftoppm -png -r 144 outputs/macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.1.pdf work/final_render/mac/page
 python tools/make_contact_sheets.py
 ```
 

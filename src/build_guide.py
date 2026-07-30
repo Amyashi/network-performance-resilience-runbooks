@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 PAGE_W, PAGE_H = landscape(letter)
 TOTAL_PAGES = 32
-VERSION = "1.0.0"
+VERSION = "1.0.1"
 RELEASE_DATE_LONG = "30 July 2026"
 RELEASE_DATE_SHORT = "30 Jul 2026"
 

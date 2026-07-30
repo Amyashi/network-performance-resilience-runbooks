@@ -1,7 +1,7 @@
 # macOS Apple Silicon Network Performance & Resilience Runbook
 
 **Edition:** macOS on Apple silicon
-**Version:** 1.0.0
+**Version:** 1.0.1
 **Release date:** 30 July 2026
 **Author:** Amyashi
 

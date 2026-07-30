@@ -13,7 +13,7 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUTS = ROOT / "outputs"
 SPECS = {
-    "Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.0.pdf": {
+    "Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf": {
         "pages": 32,
         "required": [
             "Windows 11 Pro Wired Network Performance & Resilience Runbook",
@@ -30,7 +30,7 @@ SPECS = {
         ],
         "forbidden": ["Home in S mode", "fake gpedit packages"],
     },
-    "Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.0.pdf": {
+    "Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf": {
         "pages": 32,
         "required": [
             "Windows 11 Home Wired Network Performance & Resilience Runbook",
@@ -52,7 +52,7 @@ SPECS = {
             "Do not include drivers with Windows Updates",
         ],
     },
-    "macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.0.pdf": {
+    "macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.1.pdf": {
         "pages": 26,
         "required": [
             "macOS Network Performance & Resilience Runbook",
