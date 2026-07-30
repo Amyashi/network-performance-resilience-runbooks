@@ -46,7 +46,7 @@ body:
     attributes:
       label: Version or commit
       description: Identify the release, commit, PDF page, or Markdown section.
-      placeholder: "v1.0.1, commit hash, or page/section"
+      placeholder: "v1.0.2, commit hash, or page/section"
     validations:
       required: true
   - type: textarea

@@ -1,7 +1,7 @@
 # Windows 11 Pro Wired Network Performance & Resilience Runbook
 
 **Edition:** Windows 11 Pro
-**Version:** 1.0.1
+**Version:** 1.0.2
 **Release date:** 30 July 2026
 **Author:** Amyashi
 

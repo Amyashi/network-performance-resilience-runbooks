@@ -9,9 +9,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUTS = ROOT / "outputs"
 PDFS = (
-    "Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf",
-    "Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.1.pdf",
-    "macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.1.pdf",
+    "Windows_11_Pro_Wired_Network_Performance_Resilience_Runbook_v1.0.2.pdf",
+    "Windows_11_Home_Wired_Network_Performance_Resilience_Runbook_v1.0.2.pdf",
+    "macOS_Apple_Silicon_Network_Performance_Resilience_Runbook_v1.0.2.pdf",
 )
 
 

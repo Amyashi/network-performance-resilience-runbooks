@@ -7,10 +7,10 @@ replace an upstream license.
 
 | Component | Version | Purpose | License |
 | --- | ---: | --- | --- |
-| [ReportLab](https://pypi.org/project/reportlab/4.4.9/) | 4.4.9 | PDF generation | BSD-style license |
-| [pypdf](https://pypi.org/project/pypdf/6.10.0/) | 6.10.0 | PDF structure, metadata, and link validation | BSD-3-Clause |
-| [pdfplumber](https://pypi.org/project/pdfplumber/0.11.9/) | 0.11.9 | PDF text and geometry validation | MIT |
-| [Pillow](https://pypi.org/project/pillow/12.2.0/) | 12.2.0 | Local contact-sheet generation | MIT-CMU |
+| [ReportLab](https://pypi.org/project/reportlab/5.0.0/) | 5.0.0 | PDF generation | BSD-style license |
+| [pypdf](https://pypi.org/project/pypdf/6.14.2/) | 6.14.2 | PDF structure, metadata, and link validation | BSD-3-Clause |
+| [pdfplumber](https://pypi.org/project/pdfplumber/0.11.10/) | 0.11.10 | PDF text and geometry validation | MIT |
+| [Pillow](https://pypi.org/project/pillow/12.3.0/) | 12.3.0 | Local contact-sheet generation | MIT-CMU |
 
 The authoritative license text for each installed package is included in its
 distribution and source repository. Transitive dependencies retain their own
